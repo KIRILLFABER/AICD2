@@ -81,8 +81,16 @@ Node* AVL::insert(Node* node, int key) {
 }
 
 Node* AVL::findMin(Node* node) {
-	if (node->left == nullptr && node->right == nullptr) return node;
-	node = findMin(node->left);
+	return node->left ? findMin(node->left) : node;
+}
+
+Node* AVL::eraseMin(Node* node) 
+{
+	if (node->left == 0) {
+		return node->right;
+	}	
+	node->left = eraseMin(node->left);
+	return balance(node);
 }
 
 Node* AVL::erase(Node* node, int key) {
@@ -98,12 +106,26 @@ Node* AVL::erase(Node* node, int key) {
 		Node* right = node->right;
 		delete node;
 		if (right == nullptr) return left;
-		//
+		Node* min = findMin(right);
+		min->right = eraseMin(right);
+		min->left = left;
+		return balance(min);
 	}
+	return balance(node);
 }
 
-Node* AVL::search(Node* node, int key) {
-	return node;
+Node* AVL::search(Node* root, int key) {
+	Node* curr = root;
+	while (curr && key != curr->key) {
+		if (key > curr->key) {
+			curr = curr->right;
+		}
+		else if (key < curr->key) {
+			curr = curr->left;
+		}
+
+	}
+	return curr;
 }
 
 void AVL::inOrder(Node* node) {

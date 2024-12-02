@@ -1,8 +1,4 @@
-﻿  AVL.cpp
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\AVL.cpp(22,9): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-  BST.cpp
-  RB.cpp
-  Создание кода...
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\AVL.cpp(86): warning C4715: AVL::findMin: значение возвращается не при всех путях выполнения
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\AVL.cpp(103): warning C4715: AVL::erase: значение возвращается не при всех путях выполнения
+﻿  Data.cpp
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\Data.cpp(5,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\Data.cpp(21,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   lab2.vcxproj -> C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\x64\Debug\lab2.exe

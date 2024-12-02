@@ -1,4 +1,4 @@
-#include "BST.h"
+п»ї#include "BST.h"
 #include <iostream>
 
 using namespace BST;
@@ -9,33 +9,36 @@ Node::Node(int key) {
 	this->left = nullptr;
 	this->right = nullptr;
 	this->cnt++;
+	this->h = 1;
 }
 Node::~Node() {
-	this->cnt--;
+	Node::cnt--;
+	std::cout << "DESTRUCT\n";
 }
 
-void BST::insert(Node* root, int key) {
-	Node* newNode = new Node(key);
-	Node* x = root;
-	Node* parent = nullptr;
-	while (x != nullptr) {
-		parent = x;
-		if (key < x->key) {
-			x = x->left;
-		}
-		else {
-			x = x->right;
-		}
-	}
-	if (key > parent->key) {
-		parent->right = newNode;
+void BST::fixHeight(Node* node) {
+	size_t h_left = height(node->left);
+	size_t h_right = height(node->right);
+	node->h = (h_left > h_right ? h_left : h_right) + 1;
+}
+
+size_t BST::height(Node* node) {
+	return node ? node->h : 0;
+}
+
+Node* BST::insert(Node* node, int key) {
+	if (node == nullptr) return new Node(key);
+	if (key < node->key) {
+		node->left = insert(node->left, key);
 	}
 	else {
-		parent->left = newNode;
+		node->right = insert(node->right, key);
 	}
+	fixHeight(node);
+	return node;
 }
 
-void BST::erase(Node* root, int key) { // не работает при удалении узла где один из детей - лист
+void BST::erase(Node* root, int key) { // Г­ГҐ Г°Г ГЎГ®ГІГ ГҐГІ ГЇГ°ГЁ ГіГ¤Г Г«ГҐГ­ГЁГЁ ГіГ§Г«Г  ГЈГ¤ГҐ Г®Г¤ГЁГ­ ГЁГ§ Г¤ГҐГІГҐГ© - Г«ГЁГ±ГІ
 	Node* curr = root;
 	Node* parent = nullptr;
 	while (curr && curr->key != key) {
@@ -48,7 +51,7 @@ void BST::erase(Node* root, int key) { // не работает при удалении узла где один
 		}
 	}
 	if (!curr) return;
-	// Если узел имеет не больше одного ребенка
+	// Г…Г±Г«ГЁ ГіГ§ГҐГ« ГЁГ¬ГҐГҐГІ Г­ГҐ ГЎГ®Г«ГјГёГҐ Г®Г¤Г­Г®ГЈГ® Г°ГҐГЎГҐГ­ГЄГ 
 	if (curr->left == nullptr) {
 		if (parent && parent->left == curr) parent->left = curr->right;
 		else if (parent && parent->right == curr) parent->right = curr->right;
@@ -61,14 +64,14 @@ void BST::erase(Node* root, int key) { // не работает при удалении узла где один
 		delete curr;
 		return;
 	}
-	// Если у узла есть 2 ребенка
+	// Г…Г±Г«ГЁ Гі ГіГ§Г«Г  ГҐГ±ГІГј 2 Г°ГҐГЎГҐГ­ГЄГ 
 	if (curr->left != nullptr && curr->right != nullptr) {
 		Node* newCurr = curr->right;
 		while (newCurr->left != nullptr) newCurr = newCurr->left;
 		curr->key = newCurr->key;
 		erase(curr->right, newCurr->key);
-		
-	
+
+
 	}
 
 }
@@ -92,7 +95,7 @@ Node* BST::search(Node* root, int key) {
 		else if (key < curr->key) {
 			curr = curr->left;
 		}
-		
+
 	}
 	return curr;
 }

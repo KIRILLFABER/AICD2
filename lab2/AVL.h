@@ -22,7 +22,8 @@ namespace AVL {
 	Node* insert(Node* root, int key);
 	Node* erase(Node* node, int key);
 	Node* findMin(Node* node);
-	Node* search(Node* node, int key);
+	Node* eraseMin(Node* node);
+	Node* search(Node* root, int key);
 	void inOrder(Node* node);
 }
 
