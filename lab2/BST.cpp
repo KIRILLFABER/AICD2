@@ -13,7 +13,6 @@ Node::Node(int key) {
 }
 Node::~Node() {
 	Node::cnt--;
-	std::cout << "DESTRUCT\n";
 }
 
 void BST::fixHeight(Node* node) {
@@ -85,6 +84,7 @@ void BST::inOrder(Node* node)
 	std::cout << node->key << " ";
 	inOrder(node->right);
 }
+
 
 Node* BST::search(Node* root, int key) {
 	Node* curr = root;

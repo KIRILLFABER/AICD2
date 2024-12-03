@@ -132,6 +132,7 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RB.cpp" />
+    <ClCompile Include="Traversal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVL.h" />
