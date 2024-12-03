@@ -128,10 +128,5 @@ Node* AVL::search(Node* root, int key) {
 	return curr;
 }
 
-void AVL::inOrder(Node* node) {
-	if (node == nullptr) return;
-	inOrder(node->left);
-	std::cout << node->key << " ";
-	inOrder(node->right);
-}
+
 

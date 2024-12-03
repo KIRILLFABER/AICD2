@@ -2,7 +2,7 @@
 #include <random>
 
 const int MAX_VAL = 100;
-const int SIZE = 1e2;
+const int SIZE = 1e3;
 
 
 
@@ -36,14 +36,14 @@ void fillDataFile(std::string filename) {
 
     }
     // RB
-    /*
+    
     RB::Node* RBroot = new RB::Node(rand() % MAX_VAL);
     for (int i = 0; i < SIZE; i++) {
-        RBroot = RB::insert(AVLroot, rand() % MAX_VAL);
-        data_file << "RB;" << RB::Node::cnt << ";" << RB::height(AVLroot) << "\n";
+        RBroot = RB::insert(RBroot, rand() % MAX_VAL);
+        data_file << "RB;" << RB::Node::cnt << ";" << RB::height(RBroot) << "\n";
 
     }
-    */
+
 
 
 

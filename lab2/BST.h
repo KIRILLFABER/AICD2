@@ -20,7 +20,6 @@ namespace BST {
 
 	void erase(Node* root, int key);
 
-	void inOrder(Node* node);
 
 	Node* search(Node* root, int key);
 

@@ -20,13 +20,28 @@ namespace RB {
 	};
 
 
-	void fixInsert(Node* node);
+
+	size_t height(Node* node);
+
+	void fixHeight(Node* node);
+
+	void rotateLeft(Node* root, Node* node);
+
+	void rotateRight(Node* root, Node* node);
+
+	void fixInsert(Node* root, Node* node);
 
 	Node* insert(Node* node, int key);
 
 	Node* search(Node* root, int key);
 
-	void inOrder(Node* node);
+	Node* minimum(Node* node);
+
+	void fixDelete(Node* root, Node* node);
+
+	Node* deleteNode(Node* root, int key);
+
+	
 
 }
 

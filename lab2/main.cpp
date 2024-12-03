@@ -5,18 +5,69 @@
 #include "Data.h"
 #include "Traversal.cpp"
 
+const int MAX_VAL = 70;
+const int SIZE = 10;
+
+
+void printTraversals() {
+
+	srand(time(NULL));
+	BST::Node* BSTtree = new BST::Node(rand() % MAX_VAL);
+	for (int i = 0; i < SIZE; i++) {
+		int val = rand() % MAX_VAL;
+		while (BST::search(BSTtree, val)) {
+			val = rand() % MAX_VAL;
+		}
+		BSTtree = BST::insert(BSTtree, val);
+	}
+	AVL::Node* AVLtree = new AVL::Node(rand() % MAX_VAL);
+	for (int i = 0; i < SIZE; i++) {
+		int val = rand() % MAX_VAL;
+		while (AVL::search(AVLtree, val)) {
+			val = rand() % MAX_VAL;
+		}
+		AVLtree = AVL::insert(AVLtree, val);
+	}
+	RB::Node* RBtree = new RB::Node(rand() % MAX_VAL);
+	for (int i = 0; i < SIZE; i++) {
+		int val = rand() % MAX_VAL;
+		while (RB::search(RBtree, val)) {
+			val = rand() % MAX_VAL;
+		}
+		RBtree = RB::insert(RBtree, val);
+		
+	}
+	
 
 
 
-template <class T> void printTraversals(T root) {
+	std::cout << "Binary search tree:\n";
 	std::cout << "DFS IN ORDER:\n";
-	inOrder(root);
+	inOrder(BSTtree);
 	std::cout << "\nDFS PRE ORDER:\n";
-	preOrder(root);
+	preOrder(BSTtree);
 	std::cout << "\nDFS POST ORDER:\n";
-	postOrder(root);
+	postOrder(BSTtree);
 	std::cout << "\nBFS:\n";
-	breadth(root);
+	breadth(BSTtree);
+	std::cout << "\n==========================\nAVL tree:\n";
+	std::cout << "DFS IN ORDER:\n";
+	inOrder(AVLtree);
+	std::cout << "\nDFS PRE ORDER:\n";
+	preOrder(AVLtree);
+	std::cout << "\nDFS POST ORDER:\n";
+	postOrder(AVLtree);
+	std::cout << "\nBFS:\n";
+	breadth(AVLtree);
+	std::cout << "\n==========================\nRed Black tree:\n";
+	std::cout << "DFS IN ORDER:\n";
+	inOrder(RBtree);
+	std::cout << "\nDFS PRE ORDER:\n";
+	preOrder(RBtree);
+	std::cout << "\nDFS POST ORDER:\n";
+	postOrder(RBtree);
+	std::cout << "\nBFS:\n";
+	breadth(RBtree);
 
 
 }
@@ -24,12 +75,7 @@ template <class T> void printTraversals(T root) {
 int main() {
 
 	fillDataFile("DATA.csv");
-	srand(time(NULL));
-	AVL::Node* root = new AVL::Node(25);
-	for (int i = 0; i < 20; i++) {
-		root = AVL::insert(root, rand() % 50);
-	}
-	printTraversals(root);
+	printTraversals();
 
 
 	
