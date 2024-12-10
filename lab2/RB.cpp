@@ -29,98 +29,79 @@ void RB::fixHeight(Node* node) {
     node->h = std::max(h_left, h_right) + 1;  
 }
 
-void RB::rotateLeft(Node* root, Node* node) {
-    Node* rightChild = node->right;
-    node->right = rightChild->left;
-    if (rightChild->left != nullptr) {
-        rightChild->left->parent = node;
-    }
-    rightChild->parent = node->parent;
-    if (node->parent == nullptr) {
-        root = rightChild;
-    }
-    else if (node == node->parent->left) {
-        node->parent->left = rightChild;
-    }
-    else {
-        node->parent->right = rightChild;
-    }
-    rightChild->left = node;
-    node->parent = rightChild;
+Node* RB::rotateRight(Node* a) {
+    Node* b = a->left;
+    a->left = b->right;
+    b->right = a;
+    fixHeight(a);
+    fixHeight(b);
+    return b;
 
-    // ќбновл€ем высоты
-    fixHeight(node);
-    fixHeight(rightChild);
 }
 
-void RB::rotateRight(Node* root, Node* node) {
-    Node* leftChild = node->left;
-    node->left = leftChild->right;
-    if (leftChild->right != nullptr) {
-        leftChild->right->parent = node;
-    }
-    leftChild->parent = node->parent;
-    if (node->parent == nullptr) {
-        root = leftChild;
-    }
-    else if (node == node->parent->right) {
-        node->parent->right = leftChild;
-    }
-    else {
-        node->parent->left = leftChild;
-    }
-    leftChild->right = node;
-    node->parent = leftChild;
-
-    
-    fixHeight(node);
-    fixHeight(leftChild);
+Node* RB::rotateLeft(Node* a) {
+    Node* b = a->right;
+    a->right = b->left;
+    b->left = a;
+    fixHeight(a);
+    fixHeight(b);
+    return b;
 }
 
 void RB::fixInsert(Node* root, Node* node) {
-    
+
+    // ѕоднимаемс€ вверх, пока не дойдем до корн€
     while (node != root && node->parent != nullptr && node->parent->parent != nullptr && node->parent->color == RED) {
-        
+        // ≈сли родитель ноды - левый сын своего родител€
         if (node->parent == node->parent->parent->left) {
             Node* uncle = node->parent->parent->right;
-
+            Node* grand = node->parent->parent;
+            // 1) ƒ€д€ красный - просто перекрашиваем
             if (uncle != nullptr && uncle->color == RED) {
                 
                 node->parent->color = BLACK;
                 uncle->color = BLACK;
-                node->parent->parent->color = RED;
-                node = node->parent->parent; 
+                grand->color = RED;
+                node = grand; 
             }
+            // 2) ƒ€д€ черный
             else {
-                
-                if (node == node->parent->right) {
-                    node = node->parent;  
-                    rotateLeft(root, node);
+                // 2.1) нода - левый сын своего родиетл€ - правый поворот относительно деда
+
+
+                if (node == node->parent->right) { // 2.2) нода - правый сын своего родител€ (сводитс€ к 2.1) - левый поворот относительно родител€
+                    rotateLeft(node->parent);
+                    node = node->parent;
                 }
                 
                 node->parent->color = BLACK;
-                node->parent->parent->color = RED;
-                rotateRight(root, node->parent->parent);
+                grand->color = RED;
+                rotateRight(grand);
             }
         }
+        // ≈сли родитель ноды - правый сын своего родител€
         else {
             Node* uncle = node->parent->parent->left;
-
+            Node* grand = node->parent->parent;
+            // 1) ƒ€д€ красный
             if (uncle != nullptr && uncle->color == RED) {
                 
                 node->parent->color = BLACK;
                 uncle->color = BLACK;
-                node->parent->parent->color = RED;
-                node = node->parent->parent; 
+                grand->color = RED;
+                node = grand; 
             }
+            // 2) ƒ€д€ черный
             else {
-                if (node == node->parent->left) {
-                    node = node->parent; 
-                    rotateRight(root, node);
+                // 2.1) нода - левый сын своего родиетл€
+
+                if (node == node->parent->left) { // 2.2) нода - правый сын своего родител€ (сводитс€ к 2.1)
+                    rotateRight(node->parent);
+                    node = node->parent;
                 }
                 node->parent->color = BLACK;
-                node->parent->parent->color = RED;
-                rotateLeft(root, node->parent->parent);
+                grand->color = RED;
+                rotateLeft(grand);
             }
         }
     }
@@ -184,7 +165,7 @@ void RB::fixDelete(Node* root, Node* node) {
             if (sibling->color == RED) {
                 sibling->color = BLACK;
                 node->parent->color = RED;
-                rotateLeft(root, node->parent);
+                rotateLeft(node->parent);
                 sibling = node->parent->right;
             }
             if ((sibling->left == nullptr || sibling->left->color == BLACK) &&
@@ -196,7 +177,7 @@ void RB::fixDelete(Node* root, Node* node) {
                 if (sibling->right == nullptr || sibling->right->color == BLACK) {
                     sibling->left->color = BLACK;
                     sibling->color = RED;
-                    rotateRight(root, sibling);
+                    rotateRight(sibling);
                     sibling = node->parent->right;
                 }
                 sibling->color = node->parent->color;
@@ -204,7 +185,7 @@ void RB::fixDelete(Node* root, Node* node) {
                 if (sibling->right != nullptr) {
                     sibling->right->color = BLACK;
                 }
-                rotateLeft(root, node->parent);
+                rotateLeft(node->parent);
                 node = root;
             }
         }
@@ -213,7 +194,7 @@ void RB::fixDelete(Node* root, Node* node) {
             if (sibling->color == RED) {
                 sibling->color = BLACK;
                 node->parent->color = RED;
-                rotateRight(root, node->parent);
+                rotateRight(node->parent);
                 sibling = node->parent->left;
             }
             if ((sibling->left == nullptr || sibling->left->color == BLACK) &&
@@ -225,7 +206,7 @@ void RB::fixDelete(Node* root, Node* node) {
                 if (sibling->left == nullptr || sibling->left->color == BLACK) {
                     sibling->right->color = BLACK;
                     sibling->color = RED;
-                    rotateLeft(root, sibling);
+                    rotateLeft(sibling);
                     sibling = node->parent->left;
                 }
                 sibling->color = node->parent->color;
@@ -233,7 +214,7 @@ void RB::fixDelete(Node* root, Node* node) {
                 if (sibling->left != nullptr) {
                     sibling->left->color = BLACK;
                 }
-                rotateRight(root, node->parent);
+                rotateRight(node->parent);
                 node = root;
             }
         }

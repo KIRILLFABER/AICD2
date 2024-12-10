@@ -25,9 +25,9 @@ namespace RB {
 
 	void fixHeight(Node* node);
 
-	void rotateLeft(Node* root, Node* node);
+	Node* rotateRight(Node* a);
 
-	void rotateRight(Node* root, Node* node);
+	Node* rotateLeft(Node* a);
 
 	void fixInsert(Node* root, Node* node);
 

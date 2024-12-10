@@ -51,14 +51,14 @@ Node* AVL::rotateLeft(Node* a) {
 
 Node* AVL::balance(Node* node) {
 	fixHeight(node);
-	if (bFactor(node) == 2) {
-		if (bFactor(node->right) < 0) {
+	if (bFactor(node) == 2) { // r > l
+		if (bFactor(node->right) < 0) { // l > r
 			node->right = rotateRight(node->right);
 		}
 		return rotateLeft(node);
 	}
-	if (bFactor(node) == -2) {
-		if (bFactor(node->left) > 0) {
+	if (bFactor(node) == -2) { // r < l
+		if (bFactor(node->left) > 0) { // l < r
 			node->left = rotateLeft(node->left);
 		}
 		return rotateRight(node);

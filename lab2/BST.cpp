@@ -37,7 +37,7 @@ Node* BST::insert(Node* node, int key) {
 	return node;
 }
 
-void BST::erase(Node* root, int key) { // íå ðàáîòàåò ïðè óäàëåíèè óçëà ãäå îäèí èç äåòåé - ëèñò
+void BST::erase(Node* root, int key) { 
 	Node* curr = root;
 	Node* parent = nullptr;
 	while (curr && curr->key != key) {
@@ -50,7 +50,6 @@ void BST::erase(Node* root, int key) { // íå ðàáîòàåò ïðè óäàë�
 		}
 	}
 	if (!curr) return;
-	// Åñëè óçåë èìååò íå áîëüøå îäíîãî ðåáåíêà
 	if (curr->left == nullptr) {
 		if (parent && parent->left == curr) parent->left = curr->right;
 		else if (parent && parent->right == curr) parent->right = curr->right;
@@ -63,7 +62,6 @@ void BST::erase(Node* root, int key) { // íå ðàáîòàåò ïðè óäàë�
 		delete curr;
 		return;
 	}
-	// Åñëè ó óçëà åñòü 2 ðåáåíêà
 	if (curr->left != nullptr && curr->right != nullptr) {
 		Node* newCurr = curr->right;
 		while (newCurr->left != nullptr) newCurr = newCurr->left;
