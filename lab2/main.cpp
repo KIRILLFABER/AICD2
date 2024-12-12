@@ -127,6 +127,14 @@ int main() {
 	rbt = RB::insert(rbt, 40);
 	rbt = RB::insert(rbt, 32);
 	rbt = RB::insert(rbt, 1);
+	rbt = RB::insert(rbt, 5);
+	rbt = RB::erase(rbt, 1);
+	rbt = RB::erase(rbt, 15);
+	rbt = RB::erase(rbt, 40);
+	rbt = RB::erase(rbt, 12);
+	rbt = RB::erase(rbt, 5);
+	rbt = RB::erase(rbt, 32);
+
 
 	std::cout << "\n\n\n\nRBT:\n";
 	inOrder(rbt);

@@ -33,6 +33,17 @@ def pracGraphics():
     plt.legend()
     # Сохранение файла
     plt.savefig("Graphics\BST.png")
+    #BST (возрастающие ключи)
+    plt.clf()
+    plt.xlabel("n")
+    plt.ylabel("h(n)")
+    n.clear()
+    h.clear()
+    readData(n, h, "BSTW")
+    plt.scatter(n, h, label="BST (Возрастающие ключи)")
+    reg(n, h, "blue", 1)
+    plt.legend()
+    plt.savefig("Graphics\BSTW.png")
     #AVL
     plt.clf()
     plt.xlabel("n")
@@ -70,6 +81,7 @@ def pracGraphics():
     reg(n3, h3, "green", 3)
     plt.legend()
     plt.savefig("Graphics\ALL.png")
+    
 
 def reg(n, h, col, index):
     # Находим коэффициенты регрессии 2-й степени

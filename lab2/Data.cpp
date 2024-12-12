@@ -27,6 +27,16 @@ void fillDataFile(std::string filename) {
             data_file << "BST;" << BST::Node::cnt << ";" << BST::height(BSTroot) << "\n";
 
     }
+    BST::Node::cnt = 0;
+
+    // BST (Возрастающие ключи)
+    BST::Node* BSTWroot = new BST::Node(-1);
+    for (int i = 0; i < SIZE; i++) {
+
+        BSTWroot = BST::insert(BSTWroot, i);
+        data_file << "BSTW;" << BST::Node::cnt << ";" << BST::height(BSTWroot) << "\n";
+
+    }
         
     // AVL
     AVL::Node* AVLroot = new AVL::Node(rand() % MAX_VAL);

@@ -28,7 +28,11 @@ namespace RB {
 
 	size_t height(Node* node);
 
+	size_t blackHeight(Node* node);
+
 	void fixHeight(Node* node);
+
+	void fixBlackHeight(Node* node);
 
 	void fixAllHeights(Node* root);
 
@@ -45,9 +49,9 @@ namespace RB {
 
 	Node* minimum(Node* node);
 
-	void fixDelete(Node* root, Node* node);
+	void fixErase(Node* root, Node* node);
 
-	Node* deleteNode(Node* root, int key);
+	Node* erase(Node* root, int key);
 
 	
 

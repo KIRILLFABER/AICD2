@@ -32,11 +32,22 @@ void RB::setColor(Node* node, Color color) {
 size_t RB::height(Node* node) {
     return node ? node->h : 0;
 }
+size_t RB::blackHeight(Node* node) {
+    return node ? node->bh : 1;
+}
 
 void RB::fixHeight(Node* node) {
     size_t h_left = height(node->left);
     size_t h_right = height(node->right);
     node->h = std::max(h_left, h_right) + 1;  
+}
+
+
+
+void RB::fixBlackHeight(Node* node) {
+    size_t bh_left = blackHeight(node->left);
+    size_t bh_right = blackHeight(node->right);
+    node->h = std::max(bh_left, bh_right) + 1;
 }
 
 void RB::fixAllHeights(Node* node) {
@@ -93,7 +104,7 @@ Node* RB::rotateLeft(Node* root, Node* a) {
     return root;
 }
 
-Node* RB::fixInsert(Node* root, Node* node) { // Не обновляется корень после поворотов (root указывает не на корень)
+Node* RB::fixInsert(Node* root, Node* node) { 
 
     // Поднимаемся вверх, пока не дойдем до корня
     while (node != root && node->parent != nullptr && node->parent->parent != nullptr && node->parent->color == RED) {
@@ -207,8 +218,8 @@ Node* RB::minimum(Node* node) {
     return node;
 }
 
-void RB::fixDelete(Node* root, Node* node) {
-    while (node != root && node->color == BLACK) {
+void RB::fixErase(Node* root, Node* node) {
+    while (node && node != root && getColor(node) == BLACK) {
         if (node == node->parent->left) {
             Node* sibling = node->parent->right;
             if (sibling->color == RED) {
@@ -268,10 +279,10 @@ void RB::fixDelete(Node* root, Node* node) {
             }
         }
     }
-    node->color = BLACK;
+    setColor(node, BLACK);
 }
 
-Node* RB::deleteNode(Node* root, int key) {
+Node* RB::erase(Node* root, int key) {
     Node* nodeToDelete = search(root, key);
     if (nodeToDelete == nullptr) {
         return root;
@@ -286,6 +297,7 @@ Node* RB::deleteNode(Node* root, int key) {
     else {
         y = minimum(nodeToDelete->right);
     }
+
 
     if (y->left != nullptr) {
         x = y->left;
@@ -313,9 +325,9 @@ Node* RB::deleteNode(Node* root, int key) {
     }
 
     if (y->color == BLACK) {
-        fixDelete(root, x);
+        fixErase(root, x);
     }
-
+    fixAllHeights(root);
     delete y;
     return root;
 }
