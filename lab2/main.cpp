@@ -74,7 +74,7 @@ void printTraversals() {
 
 int main() {
 
-	//fillDataFile("DATA.csv");
+	fillDataFile("DATA.csv");
 	//printTraversals();
 
 	AVL::Node* root = new AVL::Node(25);
@@ -113,6 +113,7 @@ int main() {
 	a = AVL::insert(a, 10);
 	a = AVL::insert(a, 12);
 	a = AVL::insert(a, 11);
+	
 	inOrder(a);
 
 
@@ -129,6 +130,7 @@ int main() {
 
 	std::cout << "\n\n\n\nRBT:\n";
 	inOrder(rbt);
+	std::cout << "\n\n\nheight = " << rbt->h;
 	// 1 12 14 15 32 40
 
 

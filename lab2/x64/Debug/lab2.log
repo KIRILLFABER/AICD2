@@ -1,12 +1,3 @@
-﻿  main.cpp
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(14,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(101,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(101,9): message : рекомендуется использовать "%zd" в строке форматирования
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(101,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(101,9): message : рекомендуется использовать "%zd" в строке форматирования
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(102,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(102,9): message : рекомендуется использовать "%zd" в строке форматирования
-  RB.cpp
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\RB.cpp(233,11): warning C4101: xParent: неиспользованная локальная переменная
-  Создание кода...
+﻿  RB.cpp
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\RB.cpp(282,11): warning C4101: xParent: неиспользованная локальная переменная
   lab2.vcxproj -> C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\x64\Debug\lab2.exe

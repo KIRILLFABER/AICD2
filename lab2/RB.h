@@ -5,6 +5,7 @@ namespace RB {
 	class Node {
 	public:
 		static int cnt;
+		static Node* nil;
 		int key;
 		Node* left;
 		Node* right;
@@ -13,7 +14,7 @@ namespace RB {
 		size_t h;
 		size_t bh;
 
-		Node(int key);
+		Node(int key); 
 		~Node();
 
 
@@ -21,15 +22,22 @@ namespace RB {
 
 
 
+	Color getColor(Node* node);
+
+	void setColor(Node* node, Color color);
+
 	size_t height(Node* node);
 
 	void fixHeight(Node* node);
 
-	Node* rotateRight(Node* a);
+	void fixAllHeights(Node* root);
 
-	Node* rotateLeft(Node* a);
+	Node* rotateRight(Node* root, Node* a);
 
-	void fixInsert(Node* root, Node* node);
+	Node* rotateLeft(Node* root, Node* a);
+
+	Node* fixInsert(Node* root, Node* node);
+
 
 	Node* insert(Node* node, int key);
 
