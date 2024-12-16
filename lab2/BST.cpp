@@ -67,8 +67,6 @@ void BST::erase(Node* root, int key) {
 		while (newCurr->left != nullptr) newCurr = newCurr->left;
 		curr->key = newCurr->key;
 		erase(curr->right, newCurr->key);
-
-
 	}
 
 }

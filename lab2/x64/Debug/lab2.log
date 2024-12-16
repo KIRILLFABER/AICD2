@@ -1,4 +1,9 @@
-﻿  Data.cpp
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\Data.cpp(5,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\Data.cpp(21,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+﻿  main.cpp
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(14,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(103,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(103,9): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(103,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(103,9): message : рекомендуется использовать "%zd" в строке форматирования
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(104,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\main.cpp(104,9): message : рекомендуется использовать "%zd" в строке форматирования
   lab2.vcxproj -> C:\Users\KIRIL\OneDrive\Рабочий стол\Учёба\Алгосы\лаб 2\lab2\x64\Debug\lab2.exe

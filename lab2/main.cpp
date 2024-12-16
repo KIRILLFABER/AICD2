@@ -74,8 +74,10 @@ void printTraversals() {
 
 int main() {
 
-	fillDataFile("DATA.csv");
-	//printTraversals();
+	//fillDataFile("DATA.csv");
+	printTraversals();
+
+	std::cout << "\n\n\n\n\n\n\n";
 
 	AVL::Node* root = new AVL::Node(25);
 	root = AVL::insert(root, 1);
@@ -108,11 +110,15 @@ int main() {
 
 
 	// AVL
-	AVL::Node* a = new AVL::Node(15);
-	a = AVL::insert(a, 30);
+	AVL::Node* a = new AVL::Node(12);
 	a = AVL::insert(a, 10);
-	a = AVL::insert(a, 12);
+	a = AVL::insert(a, 25);
+	a = AVL::insert(a, 9);
 	a = AVL::insert(a, 11);
+	a = AVL::insert(a, 8);
+	a = AVL::insert(a, 30);
+	a = AVL::insert(a, 35);
+
 	
 	inOrder(a);
 
@@ -121,25 +127,23 @@ int main() {
 
 	// RBT
 
-	RB::Node* rbt = new RB::Node(15);
-	rbt = RB::insert(rbt, 12);
-	rbt = RB::insert(rbt, 14);
-	rbt = RB::insert(rbt, 40);
-	rbt = RB::insert(rbt, 32);
-	rbt = RB::insert(rbt, 1);
+	RB::Node* rbt = new RB::Node(6);
+	rbt = RB::insert(rbt, 8);
+	rbt = RB::insert(rbt, 7);
+	rbt = RB::insert(rbt, 10);
 	rbt = RB::insert(rbt, 5);
-	rbt = RB::erase(rbt, 1);
-	rbt = RB::erase(rbt, 15);
-	rbt = RB::erase(rbt, 40);
-	rbt = RB::erase(rbt, 12);
+	rbt = RB::erase(rbt, 6);
 	rbt = RB::erase(rbt, 5);
-	rbt = RB::erase(rbt, 32);
 
 
 	std::cout << "\n\n\n\nRBT:\n";
 	inOrder(rbt);
-	std::cout << "\n\n\nheight = " << rbt->h;
-	// 1 12 14 15 32 40
+	std::cout << "\n\n\nheight = " << RB::height(rbt);
+	// 5 6 7 8 10
+
+
+
+
 
 
 

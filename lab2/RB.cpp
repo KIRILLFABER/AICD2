@@ -164,6 +164,7 @@ Node* RB::fixInsert(Node* root, Node* node) {
         }
     }
     setColor(root, BLACK);
+    fixAllHeights(root);
     return root;
 }
 
@@ -220,60 +221,56 @@ Node* RB::minimum(Node* node) {
 
 void RB::fixErase(Node* root, Node* node) {
     while (node && node != root && getColor(node) == BLACK) {
-        if (node == node->parent->left) {
+        if (node == node->parent->left) { // ≈сли нода - левый ребенок своего родител€
             Node* sibling = node->parent->right;
-            if (sibling->color == RED) {
-                sibling->color = BLACK;
-                node->parent->color = RED;
+            // 1) ≈сли брат черный
+            if (getColor(sibling) == RED) { // 2) ≈сли брат красный - делаем левый поворот относительно родител€ и перекрашиваем (родител€ - в красный, брата - в черный) - пришли к случаю 1
+                setColor(sibling, BLACK);
+                setColor(node->parent, RED);
                 rotateLeft(root, node->parent);
-                sibling = node->parent->right;
+                sibling = node->parent->right; // ѕриходим к случаю, когда брат - черный (1)
             }
-            if ((sibling->left == nullptr || sibling->left->color == BLACK) &&
-                (sibling->right == nullptr || sibling->right->color == BLACK)) {
-                sibling->color = RED;
+            if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) { // 1.1) ≈сли у брата все дети черные - перекрашиваем брата в красный и поднимаемс€ от родител€
+                setColor(sibling, RED);
                 node = node->parent;
             }
-            else {
-                if (sibling->right == nullptr || sibling->right->color == BLACK) {
-                    sibling->left->color = BLACK;
-                    sibling->color = RED;
+            else { // 1.2) ≈сли хот€ бы один ребенок брата - красный
+                // 1.2.1) ≈сли правый ребенок - красный, а левый - любой - красим брата в родительский цвет, родител€ - в черный, красного ребенка брата - в черный и делаем левый поворот относительно родител€
+                if (getColor(sibling->right) == BLACK) { // 1.2.2) ≈сли левый ребенок - красный - свапаем цвета брата и его левого ребенка и делаем правый поворот относительно брата и приходим к случаю 1.2.1
+                    setColor(sibling->left, BLACK);
+                    setColor(sibling, RED);
                     rotateRight(root, sibling);
-                    sibling = node->parent->right;
+                    sibling = node->parent->right; // ѕриходим к случаю, когда правый ребенок - красный, а левый - любой (1.2.1)
                 }
-                sibling->color = node->parent->color;
-                node->parent->color = BLACK;
-                if (sibling->right != nullptr) {
-                    sibling->right->color = BLACK;
-                }
+                setColor(sibling, getColor(node->parent));
+                setColor(node->parent, BLACK);
+                setColor(sibling->right, BLACK);
                 rotateLeft(root, node->parent);
                 node = root;
             }
         }
-        else {
+        else { // ≈сли нода - правый ребенок своего родител€ - симметрично
             Node* sibling = node->parent->left;
-            if (sibling->color == RED) {
-                sibling->color = BLACK;
-                node->parent->color = RED;
+            if (getColor(sibling) == RED) {
+                setColor(sibling, BLACK);
+                setColor(node->parent, RED);
                 rotateRight(root, node->parent);
                 sibling = node->parent->left;
             }
-            if ((sibling->left == nullptr || sibling->left->color == BLACK) &&
-                (sibling->right == nullptr || sibling->right->color == BLACK)) {
-                sibling->color = RED;
+            if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) {
+                setColor(sibling, RED);
                 node = node->parent;
             }
             else {
-                if (sibling->left == nullptr || sibling->left->color == BLACK) {
-                    sibling->right->color = BLACK;
-                    sibling->color = RED;
+                if (getColor(sibling->left) == BLACK) {
+                    setColor(sibling->right, BLACK);
+                    setColor(sibling, RED);
                     rotateLeft(root, sibling);
                     sibling = node->parent->left;
                 }
-                sibling->color = node->parent->color;
-                node->parent->color = BLACK;
-                if (sibling->left != nullptr) {
-                    sibling->left->color = BLACK;
-                }
+                setColor(sibling, getColor(node->parent));
+                setColor(node->parent, BLACK);
+                setColor(sibling->left, BLACK);
                 rotateRight(root, node->parent);
                 node = root;
             }
@@ -281,6 +278,8 @@ void RB::fixErase(Node* root, Node* node) {
     }
     setColor(node, BLACK);
 }
+
+
 
 Node* RB::erase(Node* root, int key) {
     Node* nodeToDelete = search(root, key);
@@ -290,15 +289,14 @@ Node* RB::erase(Node* root, int key) {
 
     Node* y = nodeToDelete;
     Node* x;
-    Node* xParent;
-    if (nodeToDelete->left == nullptr || nodeToDelete->right == nullptr) {
+    if (nodeToDelete->left == nullptr || nodeToDelete->right == nullptr) { // ≈сли у удал€емой ноды до одного ребенка
         y = nodeToDelete;
     }
-    else {
+    else { // ≈сли 2 ребенка
         y = minimum(nodeToDelete->right);
     }
 
-
+    // ѕереподвешиваем потомка удал€емой ноды
     if (y->left != nullptr) {
         x = y->left;
     }
@@ -306,6 +304,7 @@ Node* RB::erase(Node* root, int key) {
         x = y->right;
     }
 
+    // ѕереподвешиваем родител€ удал€емой ноды
     if (x != nullptr) {
         x->parent = y->parent;
     }
@@ -313,6 +312,8 @@ Node* RB::erase(Node* root, int key) {
     if (y->parent == nullptr) {
         root = x;
     }
+
+    // ћен€ем указатели на потомока у родител€ удал€емой ноды
     else if (y == y->parent->left) {
         y->parent->left = x;
     }
@@ -320,14 +321,15 @@ Node* RB::erase(Node* root, int key) {
         y->parent->right = x;
     }
 
+    // ¬ случае если нода имела двух потомков, мен€ем ключ удал€емый ноды на минимальный ключ из правого поддерева и удал€ем этот ключ из правого поддерева
     if (y != nodeToDelete) {
         nodeToDelete->key = y->key;
     }
 
-    if (y->color == BLACK) {
+    if (y->color == BLACK) { // ≈сли удал€ема€ нода имеет черный цвет
         fixErase(root, x);
     }
-    fixAllHeights(root);
     delete y;
+    fixAllHeights(root);
     return root;
 }
